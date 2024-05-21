@@ -1,51 +1,3 @@
-Présenté par :
-
-**Papa Samba Thiam**
-
-**Jean Marc Kouadio Dongo**
-
-**Yves-Simon Djomatchoua**
-
-**Michael Ebenezer Lekana Bitsindou**
-
-**Steven Otcho Akoti**
-
-**Table des matières** 
-
-1. **Pré-traitement**
-    
-    a) Démographie
-    
-    b) Education
-    
-    c) Génération de données d’éducation
-    
-    d) Revenue
-    
-2. **Election**
-    
-    a) Fusion des datasets
-    
-    b) Visualisation et Analyse
-    
-    c) Corrélation entre les données démographiques et économiques
-    
-3. **Vecteurs et Labélisation**
-4. **Nettoyage de la dataset**
-    - Analyse en Composantes Principales (PCA)
-5. **Modèle de prédictions**
-    
-    a) Rééquilibrage de la Dataset
-    
-    b) Modèle de prédiction
-    
-6. **Résultats**
-7. **Comparaison**
-
-Cela résume les principales sections et sous-sections du rapport sur la prédiction des élections. Vous pouvez l'utiliser pour naviguer plus facilement dans le document.
-
-1. **Source des datasets** 
-
 **Introduction**
 
 Dans ce rapport, nous présentons les résultats d'une étude exhaustive réalisée par **DataElect Analytics**, une entreprise spécialisée dans l'analyse prédictive des données électorales. Fondée en 2015, DataElect Analytics se distingue par son expertise dans l'application des technologies de machine learning et de big data pour prédire les issues des élections à différents niveaux administratifs. 
@@ -104,21 +56,7 @@ Nous avons consolidé les résultats des élections par candidat et par commune,
 
 Après avoir effectué le traitement préalable de chaque dataset, nous entamons la fusion. Cette opération se fonde sur le nom de la commune, contenu dans la colonne "Libellé de la commune", tout en tenant compte de la date à laquelle chaque donnée est affiliée.
 
-**b) Visualisation et Analyse**
-
-- Visualisation
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/cec8900d-8fab-4634-bce6-87136298b3c8/Untitled.png)
-
-> Figure 1 : Niveau de réussite au Baccalauréat par commune & par type de BAC.
-> 
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/c5d581a3-ad2d-429f-b446-4e6620eab69f/b4c06abc-d24e-440f-8e4a-f321fcb1af08.png)
-
-> Figure 2 : Répartition des voix au sein des 5 communes les plus peuplés
-> 
-
-**c) Corrélation entre les données démographiques et économiques.**
+**Corrélation entre les données démographiques et économiques.**
 
 En 2012, lors des élections dans les communes de Lyon et de Nice, on observe sur le diagramme circulaire une grande part de voix (28%) pour François Hollande, comparativement à 26,9% pour Sarkozy. Cependant, lorsque l'on se réfère à la commune de Nice, nous constatons l'effet contraire avec une majorité de voix pour Sarkozy (33,7%) contre 22,4% pour Hollande. Plusieurs facteurs puissent expliquer ce revers de situation entre Lyon et Nice lors des élections de 2012.
 
@@ -138,19 +76,7 @@ Ces vecteurs de base nous permettent de construire un modèle riche et pertinent
 
 Après avoir fusionné toutes les datasets, nous avons obtenu une dataset générale contenant 30 colonnes. La question est de savoir si toutes ces 30 colonnes sont nécessaires pour prédire le résultat. Pour répondre à cette question et simplifier le modèle, nous pouvons utiliser une méthode de nettoyage appelée Analyse en Composantes Principales (ACP).
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/5fdd750a-dc4c-40f9-9541-3497baaf7dc8/Untitled.png)
-
-> Figure 3: Heatmap des features
-> 
-
 Avant d'utiliser l'ACP, il est nécessaire de standardiser les valeurs présentes dans la dataset. Cela permet d'éviter que l'échelle de certaines colonnes n'impacte disproportionnellement le modèle. En standardisant les données, nous ramenons les valeurs à une échelle commune, ce qui facilite la comparaison entre les différentes caractéristiques et améliore les performances de l'ACP ainsi que d'autres algorithmes d'apprentissage automatique.
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/8daf8f1e-0034-4e62-aec2-00b53898f36e/Untitled.png)
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/522878ba-779d-4ece-b485-3ec5c7ee23c7/Untitled.png)
-
-> Figure 4: Heatmap après le PCA
-> 
 
 La matrice de corrélation après application du PCA nous montre que les features obtenu après l’usage du PCA montre de très faibles corrélations matérialiser par la couleur violette omni présente sur le Heatmap.
 Nous avons utilisé la méthode d'analyse en composantes personnelles pour sélectionner les 15 meilleures composantes principales qui expliquent 99,90% des variations présentes dans les données. En choisissant ces composantes, nous avons réussi à capturer l'essentiel de la structure et des motifs des données, tout en réduisant la dimensionnalité de manière significative. Cela nous permet de travailler avec un ensemble de caractéristiques plus compact et plus représentatif, ce qui peut simplifier les calculs et améliorer les performances des modèles prédictifs.
@@ -166,33 +92,12 @@ Nous avons un très grand déséquilibre entre les classes dans nos features, av
 
 Dans ce cas précis, nous avons utilisé la méthode de sous-échantillonnage appelée « Neighbourhood Cleaning Rule ». Son objectif principal est d'améliorer la qualité des données en éliminant les exemples bruyants ou mal classés qui pourraient compromettre les performances du modèle. Cette méthode repose sur le principe que les échantillons de la classe majoritaire qui sont mal classés par leurs voisins sont plus susceptibles d'être du bruit et peuvent donc être supprimés en toute sécurité.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/8d96ea83-b6ae-4d3a-a3ec-0180a163a290/Untitled.png)
-
 **b) Modèle de prédiction**
     
 
 - Arbre de décision
 
 Les arbres de décision peuvent capturer des relations non linéaires entre les variables et la variable cible. Ils peuvent identifier des motifs complexes dans les données sans nécessiter de spécification explicite de la forme de la relation, ce qui nous pousse à l’implémenter dans notre cas.
-
-1. **Résultats :**
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/ac7532fa-c270-4cd8-b095-c43e4d392c3d/Untitled.png)
-
-> Figure 5: matrice de confusion de l'arbre de décision
-> 
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/1ad2b8c2-ea15-456d-8001-968313fd3f0d/Untitled.png)
-
-> Figure 6: performance de l'arbre de décision
-> 
-
-**Prédiction :** 
-
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/517f4bc9-b09f-4550-b2a0-cc38628defbf/9ee3ab9e-f95b-40dd-80ec-2bbf3062121d/Untitled.png)
-
-> Figure 7: Prediction de président
-> 
 
 **Interpretation :**
 
@@ -230,4 +135,4 @@ Revenus et pauvreté des ménages en 2017 - Tous les niveaux géographiques **au
 
 Revenus et pauvreté des ménages en 2020 - Tous les niveaux géographiques au **1er janvier 2023** 
 
-https://www.insee.fr/fr/statistiques/6692392?sommaire=6692394#consulter
+[https://www.insee.fr/fr/statistiques/6692392?sommaire=6692394#consulte](https://www.insee.fr/fr/statistiques/6692392?sommaire=6692394#consulter)
